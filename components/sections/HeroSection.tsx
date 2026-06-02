@@ -41,7 +41,7 @@ export default function HeroSection() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
           </span>
-          Available for new projects
+          Guatemala 🇬🇹 · Open to opportunities
         </motion.div>
 
         {/* Headline */}
@@ -65,8 +65,8 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="text-lg md:text-xl text-white/40 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Full Stack Developer designing and building scalable SaaS platforms,
-          dashboards, and digital products — from first line of code to production.
+          Full Stack Developer building React SPAs, REST APIs, and complete
+          web applications — from architecture and Docker setup to production deployment.
         </motion.p>
 
         {/* CTAs */}

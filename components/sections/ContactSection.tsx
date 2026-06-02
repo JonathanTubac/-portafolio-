@@ -7,20 +7,31 @@ import MagneticButton from '@/components/ui/MagneticButton';
 const COMMANDS: { input: string; output: string[] }[] = [
   {
     input: 'whoami',
-    output: ['Jonathan Tubac — Full Stack Developer', 'Location: Guatemala 🇬🇹', 'Status: Available for new projects'],
-  },
-  {
-    input: 'cat skills.txt',
     output: [
-      'Frontend  → React, Next.js, TypeScript, Tailwind',
-      'Backend   → Node.js, NestJS, Express, GraphQL',
-      'Database  → PostgreSQL, MongoDB, Redis',
-      'DevOps    → Docker, AWS, Vercel, GitHub Actions',
+      'Jonathan Tubac — Full Stack Developer',
+      'Location: Guatemala City, Guatemala 🇬🇹',
+      'Focus: React SPAs · REST APIs · Docker',
+      'Status: Open to local & remote opportunities',
     ],
   },
   {
-    input: 'open contact',
-    output: ['Email    → jonathan.tubac@skiot.net', 'GitHub   → github.com/JonathanTubac', 'LinkedIn → linkedin.com/in/jonathan-tubac'],
+    input: 'cat stack.txt',
+    output: [
+      'Frontend  → React, Next.js, TypeScript, Tailwind CSS',
+      'Backend   → Node.js, NestJS, Express · REST APIs',
+      'Database  → PostgreSQL, MongoDB, Redis',
+      'DevOps    → Docker, GitHub Actions, Vercel, AWS',
+      'Testing   → Vitest, Jest, Supertest',
+    ],
+  },
+  {
+    input: 'open github',
+    output: [
+      '→ github.com/JonathanTubac',
+      '  ↳ Public repos with READMEs and live demos',
+      '  ↳ React SPAs · REST APIs · Dockerized projects',
+      '  ↳ Commit history shows consistent activity',
+    ],
   },
 ];
 
@@ -107,12 +118,15 @@ export default function ContactSection() {
     e.preventDefault();
     const cmd = userInput.trim().toLowerCase();
     const responses: Record<string, string> = {
-      help: 'Available: whoami | skills | contact | resume | clear',
-      resume: 'Opening resume... → /resume.pdf',
+      help: 'Commands: whoami | stack | github | contact | resume | location | clear',
+      whoami: 'Jonathan Tubac — Full Stack Developer, Guatemala City 🇬🇹',
+      stack: 'React · Next.js · Node.js · TypeScript · PostgreSQL · Docker · REST APIs',
+      skills: 'React · Next.js · Node.js · TypeScript · PostgreSQL · Docker · REST APIs',
+      github: '→ github.com/JonathanTubac  (public repos + live demos)',
       contact: 'Email: jonathan.tubac@skiot.net',
+      location: 'Guatemala City, Guatemala 🇬🇹 — Open to local & remote',
+      resume: 'Opening CV... → /jonathan-tubac-cv.pdf',
       clear: '__clear__',
-      skills: 'React · Next.js · Node.js · TypeScript · PostgreSQL · Docker',
-      whoami: 'Jonathan Tubac — Full Stack Developer from Guatemala',
     };
     const output = responses[cmd] ?? `Command not found: "${cmd}" — type "help" for available commands`;
     if (output === '__clear__') {

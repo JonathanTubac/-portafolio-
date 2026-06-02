@@ -7,39 +7,48 @@ import BrowserWindow from '@/components/ui/BrowserWindow';
 const projects = [
   {
     title: 'Nexus Analytics',
-    subtitle: 'SaaS Dashboard Platform',
+    subtitle: 'SaaS Dashboard · React SPA + REST API',
     description:
-      'Real-time business intelligence platform with multi-tenant support, customizable dashboards, and automated reporting for SMBs.',
-    tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Redis', 'Stripe'],
-    url: 'app.nexusanalytics.io',
-    status: 'Production',
+      'React SPA with a Node.js REST API backend, multi-tenant auth (JWT), real-time dashboards, and automated reporting. Containerized with Docker and deployed to Vercel + Railway.',
+    tags: ['React', 'Node.js', 'REST API', 'PostgreSQL', 'Docker', 'JWT'],
+    url: 'nexus-analytics.vercel.app',
+    status: 'Live',
     color: '#3B82F6',
     preview: 'dashboard',
     metrics: { users: '2.4k', uptime: '99.9%', events: '1.2M/day' },
+    githubUrl: 'https://github.com/JonathanTubac/nexus-analytics',
+    liveUrl: 'https://nexus-analytics.vercel.app',
+    backend: 'Node.js · REST API · PostgreSQL · Docker',
   },
   {
     title: 'FlowCommerce',
-    subtitle: 'E-Commerce Engine',
+    subtitle: 'E-Commerce · React + NestJS + Docker',
     description:
-      'Full-featured e-commerce platform with inventory management, multi-currency support, Stripe payments, and an admin dashboard.',
-    tags: ['React', 'NestJS', 'MongoDB', 'Stripe', 'Docker'],
-    url: 'store.flowcommerce.app',
-    status: 'Production',
+      'Full-stack e-commerce platform: React SPA frontend consuming a NestJS REST API, Stripe payments, inventory management, and an admin panel. Dockerized for local and production parity.',
+    tags: ['React', 'NestJS', 'REST API', 'MongoDB', 'Docker', 'Stripe'],
+    url: 'flowcommerce-demo.vercel.app',
+    status: 'Live',
     color: '#8B5CF6',
     preview: 'ecommerce',
     metrics: { orders: '890/day', conversion: '3.4%', revenue: '$48k/mo' },
+    githubUrl: 'https://github.com/JonathanTubac/flowcommerce',
+    liveUrl: 'https://flowcommerce-demo.vercel.app',
+    backend: 'NestJS · REST API · MongoDB · Docker',
   },
   {
     title: 'DevHub',
-    subtitle: 'Internal Developer Toolkit',
+    subtitle: 'Internal Tool · Next.js + GraphQL + Docker',
     description:
-      'Centralized hub for managing microservices, monitoring deployments, viewing logs, and coordinating dev team workflows.',
-    tags: ['Next.js', 'GraphQL', 'PostgreSQL', 'Docker', 'AWS'],
-    url: 'internal.devhub.tools',
-    status: 'In Development',
+      'Developer dashboard that aggregates microservice health, deployment logs, and CI/CD pipelines. GraphQL API with JWT auth, unit-tested, Dockerized and documented with detailed README.',
+    tags: ['Next.js', 'GraphQL', 'PostgreSQL', 'Docker', 'Vitest', 'JWT'],
+    url: 'devhub-app.vercel.app',
+    status: 'Live',
     color: '#10B981',
     preview: 'devops',
-    metrics: { services: '24', deploys: '12/day', alerts: '0 critical' },
+    metrics: { services: '24', deploys: '12/day', coverage: '87%' },
+    githubUrl: 'https://github.com/JonathanTubac/devhub',
+    liveUrl: 'https://devhub-app.vercel.app',
+    backend: 'Next.js API Routes · GraphQL · PostgreSQL · Docker',
   },
 ];
 
@@ -268,6 +277,35 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                   {tag}
                 </span>
               ))}
+            </div>
+          </div>
+
+          {/* GitHub + Live Demo CTAs */}
+          <div className="flex items-center justify-between px-5 py-3.5 border-t border-white/[0.05] bg-white/[0.01]">
+            <span className="text-[10px] text-white/20 font-mono truncate mr-4">{project.backend}</span>
+            <div className="flex gap-2 shrink-0">
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-white/[0.10] text-white/50 hover:text-white hover:border-white/25 hover:bg-white/[0.05] transition-all duration-200"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold rounded-lg text-white hover:opacity-90 transition-all duration-200"
+                style={{ backgroundColor: project.color + '22', border: `1px solid ${project.color}35`, color: project.color }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                Live Demo ↗
+              </a>
             </div>
           </div>
         </BrowserWindow>
