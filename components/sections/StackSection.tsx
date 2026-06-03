@@ -1,37 +1,48 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-const stack = {
+type Tech = {
+  name: string;
+  color: string;
+  img?: string;
+  icon?: string;
+};
+
+const stack: Record<string, Tech[]> = {
   Frontend: [
-    { name: 'React', color: '#61DAFB', icon: '⚛' },
-    { name: 'Next.js', color: '#ffffff', icon: '▲' },
-    { name: 'Tailwind CSS', color: '#06B6D4', icon: '~' },
-    { name: 'HTML5 / CSS3', color: '#E44D26', icon: '</>' },
+    { name: 'React',       color: '#61DAFB', img: '/react.png' },
+    { name: 'Next.js',     color: '#ffffff', img: '/next.png' },
+    { name: 'Vue',         color: '#42B883', img: '/vue.png' },
+    { name: 'Tailwind CSS',color: '#06B6D4', img: '/tailwind.png' },
+    { name: 'HTML5 / CSS3',color: '#E44D26', icon: '</>' },
   ],
   Backend: [
-    { name: 'Node.js', color: '#339933', icon: '⬡' },
-    { name: 'Express', color: '#ffffff', icon: 'Ex' },
-    { name: 'JWT', color: '#FB015B', icon: '🔑' },
-    { name: 'OAuth2', color: '#4285F4', icon: '◎' },
+    { name: 'Node.js', color: '#339933', img: '/node.png' },
+    { name: 'Express', color: '#ffffff',  img: '/express-js.png' },
+    { name: 'JWT',     color: '#FB015B', icon: '🔑' },
+    { name: 'OAuth2',  color: '#4285F4', icon: '◎' },
   ],
   Database: [
-    { name: 'PostgreSQL', color: '#336791', icon: '🐘' },
-    { name: 'MongoDB', color: '#47A248', icon: '🍃' },
-    { name: 'Neo4j', color: '#008CC1', icon: '◉' },
+    { name: 'PostgreSQL', color: '#336791', img: '/Postgresql_elephant.svg' },
+    { name: 'MongoDB',    color: '#47A248', img: '/mongo.webp' },
+    { name: 'Neo4j',      color: '#008CC1', img: '/neo.avif' },
   ],
   Languages: [
-    { name: 'JavaScript', color: '#F7DF1E', icon: 'JS' },
-    { name: 'Python', color: '#3776AB', icon: '🐍' },
-    { name: 'SQL', color: '#CC2927', icon: '⊞' },
-    { name: 'C# / Java', color: '#9B4F96', icon: '{}' },
+    { name: 'JavaScript', color: '#F7DF1E', img: '/js.png' },
+    { name: 'TypeScript', color: '#3178C6', img: '/ts.png' },
+    { name: 'Python',     color: '#3776AB', img: '/python.png' },
+    { name: 'Go',         color: '#00ADD8', img: '/go.png' },
+    { name: 'SQL',        color: '#CC2927', icon: '⊞' },
+    { name: 'C# / Java',  color: '#9B4F96', icon: '{}' },
   ],
 };
 
 const categoryColors: Record<string, string> = {
-  Frontend: '#3B82F6',
-  Backend: '#10B981',
-  Database: '#8B5CF6',
+  Frontend:  '#3B82F6',
+  Backend:   '#10B981',
+  Database:  '#8B5CF6',
   Languages: '#F59E0B',
 };
 
@@ -41,16 +52,37 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, scale: 0.85, y: 12 },
-  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
+  hidden:   { opacity: 0, scale: 0.85, y: 12 },
+  visible:  { opacity: 1, scale: 1,    y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
 };
+
+function TechIcon({ tech }: { tech: Tech }) {
+  return (
+    <div
+      className="w-8 h-8 rounded-lg flex items-center justify-center border shrink-0 transition-all duration-300 group-hover:scale-110 overflow-hidden"
+      style={{ borderColor: tech.color + '30', backgroundColor: tech.color + '10' }}
+    >
+      {tech.img ? (
+        <Image
+          src={tech.img}
+          alt={tech.name}
+          width={20}
+          height={20}
+          className="w-5 h-5 object-contain"
+        />
+      ) : (
+        <span className="text-sm font-mono font-bold" style={{ color: tech.color }}>
+          {tech.icon}
+        </span>
+      )}
+    </div>
+  );
+}
 
 export default function StackSection() {
   return (
     <section id="stack" className="relative py-32 md:py-40 bg-bg overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-50" />
-
-      {/* Background glow */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[160px] pointer-events-none" />
       <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-purple-500/5 blur-[120px] pointer-events-none" />
 
@@ -85,10 +117,7 @@ export default function StackSection() {
             >
               {/* Category header */}
               <div className="flex items-center gap-2.5 mb-2">
-                <div
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: categoryColors[category] }}
-                />
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: categoryColors[category] }} />
                 <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
                   {category}
                 </span>
@@ -108,24 +137,12 @@ export default function StackSection() {
                     variants={itemVariants}
                     className="group flex items-center gap-3 p-3.5 rounded-xl border border-white/[0.07] bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/[0.14] transition-all duration-300 cursor-default"
                   >
-                    {/* Icon */}
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-sm border shrink-0 font-mono font-bold transition-all duration-300 group-hover:scale-110"
-                      style={{
-                        borderColor: tech.color + '30',
-                        backgroundColor: tech.color + '10',
-                        color: tech.color,
-                      }}
-                    >
-                      {tech.icon}
-                    </div>
+                    <TechIcon tech={tech} />
 
-                    {/* Name */}
                     <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors">
                       {tech.name}
                     </span>
 
-                    {/* Dot indicator */}
                     <div
                       className="ml-auto w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                       style={{ backgroundColor: tech.color }}
@@ -152,7 +169,7 @@ export default function StackSection() {
             </p>
           </div>
           <div className="flex gap-2 shrink-0">
-            {['TypeScript', 'Docker', 'Git'].map((t) => (
+            {['Docker', 'Git', 'REST APIs'].map((t) => (
               <span key={t} className="px-3 py-1 text-xs rounded-full border border-white/10 text-white/40 font-mono">
                 {t}
               </span>
