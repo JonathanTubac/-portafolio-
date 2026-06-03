@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const metrics = [
-  { value: 25, suffix: '+', label: 'Projects Delivered', description: 'Shipped to production' },
-  { value: 4, suffix: '+', label: 'Years Experience', description: 'Full Stack Development' },
-  { value: 30, suffix: '+', label: 'Technologies', description: 'Across the full stack' },
-  { value: 20, suffix: '+', label: 'Apps Deployed', description: 'Cloud & on-premise' },
+  { value: 3, suffix: '+', label: 'Projects Built', description: 'Real applications shipped' },
+  { value: 2, suffix: '+', label: 'Years in Dev', description: 'Full-stack development' },
+  { value: 13, suffix: '+', label: 'Technologies', description: 'Languages, frameworks & DBs' },
+  { value: 1, suffix: 'st', label: 'Hackathon Win', description: 'Copernicus x SENACYT' },
 ];
 
 function AnimatedCounter({

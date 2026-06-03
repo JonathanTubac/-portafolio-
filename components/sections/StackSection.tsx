@@ -6,27 +6,25 @@ const stack = {
   Frontend: [
     { name: 'React', color: '#61DAFB', icon: '⚛' },
     { name: 'Next.js', color: '#ffffff', icon: '▲' },
-    { name: 'TypeScript', color: '#3178C6', icon: 'TS' },
-    { name: 'Tailwind', color: '#06B6D4', icon: '~' },
-    { name: 'Framer', color: '#BB4BFF', icon: 'F' },
+    { name: 'Tailwind CSS', color: '#06B6D4', icon: '~' },
+    { name: 'HTML5 / CSS3', color: '#E44D26', icon: '</>' },
   ],
   Backend: [
     { name: 'Node.js', color: '#339933', icon: '⬡' },
-    { name: 'NestJS', color: '#E0234E', icon: '🐈' },
     { name: 'Express', color: '#ffffff', icon: 'Ex' },
-    { name: 'GraphQL', color: '#E10098', icon: '◈' },
+    { name: 'JWT', color: '#FB015B', icon: '🔑' },
+    { name: 'OAuth2', color: '#4285F4', icon: '◎' },
   ],
   Database: [
     { name: 'PostgreSQL', color: '#336791', icon: '🐘' },
     { name: 'MongoDB', color: '#47A248', icon: '🍃' },
-    { name: 'Redis', color: '#DC382D', icon: '⚡' },
-    { name: 'Prisma', color: '#2D3748', icon: '◇' },
+    { name: 'Neo4j', color: '#008CC1', icon: '◉' },
   ],
-  DevOps: [
-    { name: 'Docker', color: '#2496ED', icon: '🐳' },
-    { name: 'AWS', color: '#FF9900', icon: '☁' },
-    { name: 'Vercel', color: '#ffffff', icon: '▲' },
-    { name: 'GitHub Actions', color: '#2088FF', icon: '⚙' },
+  Languages: [
+    { name: 'JavaScript', color: '#F7DF1E', icon: 'JS' },
+    { name: 'Python', color: '#3776AB', icon: '🐍' },
+    { name: 'SQL', color: '#CC2927', icon: '⊞' },
+    { name: 'C# / Java', color: '#9B4F96', icon: '{}' },
   ],
 };
 
@@ -34,7 +32,7 @@ const categoryColors: Record<string, string> = {
   Frontend: '#3B82F6',
   Backend: '#10B981',
   Database: '#8B5CF6',
-  DevOps: '#F59E0B',
+  Languages: '#F59E0B',
 };
 
 const containerVariants = {
@@ -150,11 +148,11 @@ export default function StackSection() {
           <div>
             <p className="text-white font-semibold mb-1">Always learning</p>
             <p className="text-white/35 text-sm">
-              Continuously expanding the stack — currently exploring: Rust, Bun, tRPC.
+              Currently studying CS at UVG — continuously expanding the stack.
             </p>
           </div>
           <div className="flex gap-2 shrink-0">
-            {['Rust', 'Bun', 'tRPC'].map((t) => (
+            {['TypeScript', 'Docker', 'Git'].map((t) => (
               <span key={t} className="px-3 py-1 text-xs rounded-full border border-white/10 text-white/40 font-mono">
                 {t}
               </span>

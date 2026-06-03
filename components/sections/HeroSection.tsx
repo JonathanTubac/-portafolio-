@@ -98,9 +98,9 @@ export default function HeroSection() {
           className="mt-20 flex justify-center gap-10 sm:gap-16"
         >
           {[
-            { value: '25+', label: 'Projects' },
-            { value: '4+', label: 'Years' },
-            { value: '30+', label: 'Technologies' },
+            { value: '3+', label: 'Projects' },
+            { value: '2+', label: 'Years' },
+            { value: '13+', label: 'Technologies' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-2xl font-bold text-white">{stat.value}</div>
