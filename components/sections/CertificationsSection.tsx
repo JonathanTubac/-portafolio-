@@ -45,9 +45,14 @@ function CertModal({ cert, onClose }: { cert: (typeof certs)[0]; onClose: () => 
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.07]">
-          <div>
-            <p className="text-sm font-semibold text-white">{cert.name}</p>
-            <p className="text-xs text-white/35 mt-0.5">{cert.issuer} · {cert.year}</p>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center shrink-0">
+              <Image src={cert.issuerLogo} alt={cert.issuer} width={24} height={24} className="w-6 h-6 object-contain" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">{cert.name}</p>
+              <p className="text-xs text-white/35 mt-0.5">{cert.issuer} · {cert.year}</p>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             {cert.credentialUrl && (
@@ -132,12 +137,18 @@ export default function CertificationsSection() {
                   style={{ background: `radial-gradient(ellipse at 50% 0%, ${cert.color}12 0%, transparent 70%)` }}
                 />
 
-                {/* Icon */}
+                {/* Issuer logo */}
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold font-mono mb-5 border transition-all duration-300 group-hover:scale-110"
-                  style={{ borderColor: cert.color + '30', backgroundColor: cert.color + '10', color: cert.color }}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 border transition-all duration-300 group-hover:scale-110 overflow-hidden"
+                  style={{ borderColor: cert.color + '30', backgroundColor: cert.color + '10' }}
                 >
-                  {cert.icon}
+                  <Image
+                    src={cert.issuerLogo}
+                    alt={cert.issuer}
+                    width={36}
+                    height={36}
+                    className="w-8 h-8 object-contain"
+                  />
                 </div>
 
                 {/* Year badge */}
