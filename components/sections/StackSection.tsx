@@ -37,6 +37,14 @@ const stack: Record<string, Tech[]> = {
     { name: 'SQL',        color: '#CC2927', icon: '⊞' },
     { name: 'C# / Java',  color: '#9B4F96', icon: '{}' },
   ],
+  Tools: [
+    { name: 'Docker',       color: '#2496ED', img: '/docker.png' },
+    { name: 'Git',          color: '#F05032', img: '/git.png' },
+    { name: 'AWS',          color: '#FF9900', img: '/aws.png' },
+    { name: 'Google Cloud', color: '#4285F4', img: '/google-cloud.png' },
+    { name: 'Linux',        color: '#FCC624', img: '/linux.png' },
+    { name: 'Figma',        color: '#F24E1E', img: '/figma.svg' },
+  ],
 };
 
 const categoryColors: Record<string, string> = {
@@ -44,6 +52,7 @@ const categoryColors: Record<string, string> = {
   Backend:   '#10B981',
   Database:  '#8B5CF6',
   Languages: '#F59E0B',
+  Tools:     '#EC4899',
 };
 
 const containerVariants = {
@@ -105,7 +114,7 @@ export default function StackSection() {
         </motion.div>
 
         {/* Stack grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {Object.entries(stack).map(([category, techs]) => (
             <motion.div
               key={category}
@@ -163,13 +172,13 @@ export default function StackSection() {
           className="mt-16 p-6 rounded-2xl border border-white/[0.07] bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-4"
         >
           <div>
-            <p className="text-white font-semibold mb-1">Always learning</p>
+            <p className="text-white font-semibold mb-1">Currently exploring</p>
             <p className="text-white/35 text-sm">
-              Currently studying CS at UVG — continuously expanding the stack.
+              Diving deeper into cloud infrastructure and backend architecture at UVG.
             </p>
           </div>
           <div className="flex gap-2 shrink-0">
-            {['Docker', 'Git', 'REST APIs'].map((t) => (
+            {['Kubernetes', 'GraphQL', 'CI/CD'].map((t) => (
               <span key={t} className="px-3 py-1 text-xs rounded-full border border-white/10 text-white/40 font-mono">
                 {t}
               </span>
