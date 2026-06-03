@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, type MouseEvent } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 import BrowserWindow from '@/components/ui/BrowserWindow';
 import { useLang } from '@/components/providers/LanguageProvider';
 
@@ -15,7 +15,7 @@ const projects = [
     url: 'waterway.app',
     status: '1st Place',
     color: '#06B6D4',
-    preview: 'water',
+    img: '/waterway.PNG',
     highlight: { label: 'Award', value: 'Copernicus x SENACYT' },
     githubUrl: 'https://github.com/JonathanTubac',
     liveUrl: null,
@@ -30,7 +30,7 @@ const projects = [
     url: 'chemiq.app',
     status: 'Deployed',
     color: '#14B8A6',
-    preview: 'management',
+    img: '/Chemiq.PNG',
     highlight: { label: 'Role', value: 'Architecture + Backend' },
     githubUrl: 'https://github.com/JonathanTubac',
     liveUrl: null,
@@ -45,165 +45,70 @@ const projects = [
     url: 'spotter.app',
     status: 'Deployed',
     color: '#F59E0B',
-    preview: 'spotter',
+    img: '/spotter.PNG',
     highlight: { label: 'Tech', value: 'Graph DB · Neo4j' },
     githubUrl: 'https://github.com/JonathanTubac',
     liveUrl: null,
     backend: 'Node.js · Express · REST API · Neo4j',
   },
+  {
+    title: 'Kontrol',
+    subtitle: 'Project Management Platform · Vue 3 + Node.js + AI',
+    description:
+      'Full-stack project management platform with team coordination, inventory tracking, and marketing tools. Features real-time communication via Socket.IO, AI agent integration, and Google OAuth authentication.',
+    tags: ['Vue 3', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'Docker', 'Socket.IO'],
+    url: 'github.com/PabloVS044/Kontrol',
+    status: 'Open Source',
+    color: '#6366F1',
+    img: '/kontrol.PNG',
+    highlight: { label: 'Tech', value: 'AI + Socket.IO' },
+    githubUrl: 'https://github.com/PabloVS044/Kontrol',
+    liveUrl: null,
+    backend: 'Vue 3 · Node.js · PostgreSQL · MongoDB · Docker',
+  },
 ];
 
-function WaterPreview({ color }: { color: string }) {
+function ImagePreview({ src, alt, color }: { src: string; alt: string; color: string }) {
   return (
-    <div className="bg-[var(--bg-card)] p-4 h-64">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: color }} />
-          <span className="text-[10px] font-mono" style={{ color }}>Live · Motagua River</span>
-        </div>
-        <span className="text-[10px] text-white/25 font-mono">Copernicus x SENACYT</span>
-      </div>
-
-      <div className="grid grid-cols-3 gap-2 mb-4">
-        {[['Water Level', '4.2m', '+0.3m'], ['Flow Rate', '12.4 m³/s', 'normal'], ['Turbidity', '18 NTU', 'clear']].map(([label, val, sub], i) => (
-          <div key={label} className="bg-white/[0.03] rounded-lg p-2.5 border border-white/[0.06]">
-            <div className="text-[9px] text-white/30 mb-1">{label}</div>
-            <div className="text-xs font-bold text-white">{val}</div>
-            <div className="text-[9px] mt-0.5" style={{ color: i === 0 ? '#F59E0B' : color }}>{sub}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="bg-white/[0.02] rounded-xl border border-white/[0.05] p-3 h-28 relative overflow-hidden">
-        <div className="text-[10px] text-white/25 mb-2">Water level — 24h</div>
-        <svg viewBox="0 0 300 55" className="w-full h-14" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="water-grad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={color} stopOpacity="0.3" />
-              <stop offset="100%" stopColor={color} stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path d="M0,40 C30,38 60,30 90,32 C120,34 140,28 160,22 C180,16 210,24 240,18 C265,13 285,20 300,16" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M0,40 C30,38 60,30 90,32 C120,34 140,28 160,22 C180,16 210,24 240,18 C265,13 285,20 300,16 L300,55 L0,55 Z" fill="url(#water-grad)" />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-function ManagementPreview({ color }: { color: string }) {
-  return (
-    <div className="bg-[var(--bg-card)] p-4 h-64">
-      <div className="flex gap-3 h-full">
-        <div className="w-24 shrink-0 flex flex-col gap-1.5">
-          {['Dashboard', 'Members', 'Inventory', 'Events', 'Reports'].map((item, i) => (
-            <div key={item} className="px-2.5 py-1.5 rounded-lg text-[10px] font-medium"
-              style={i === 2 ? { backgroundColor: color + '20', color } : { color: 'rgba(255,255,255,0.3)' }}>
-              {item}
-            </div>
-          ))}
-        </div>
-        <div className="flex-1 flex flex-col gap-2">
-          <div className="flex items-center justify-between mb-1">
-            <div className="text-[10px] text-white/40">Inventory — CHEMIQ</div>
-            <div className="text-[9px] px-2 py-0.5 rounded-full" style={{ backgroundColor: color + '20', color }}>UVG</div>
-          </div>
-          {[['HCl 35%', 'Reagent', '12 u'], ['NaOH', 'Base', '8 u'], ['Ethanol', 'Solvent', '24 u'], ['H₂SO₄', 'Acid', '6 u']].map(([name, cat, qty], i) => (
-            <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-              <div>
-                <div className="text-[10px] text-white font-mono">{name}</div>
-                <div className="text-[9px] text-white/30 mt-0.5">{cat}</div>
-              </div>
-              <div className="text-[10px] font-bold" style={{ color }}>{qty}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SpotterPreview({ color }: { color: string }) {
-  return (
-    <div className="bg-[var(--bg-card)] p-4 h-64">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-[10px] font-mono text-white/40">Gym Partner Matches</span>
-        <div className="flex items-center gap-1.5 text-[9px] px-2 py-0.5 rounded-full" style={{ backgroundColor: color + '20', color }}>
-          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
-          Neo4j Graph
-        </div>
-      </div>
-      <div className="flex flex-col gap-2.5">
-        {[['Alex M.', 'Push · Pull · Legs', 94], ['Sofia R.', 'HIIT · Strength', 88], ['Diego V.', 'Powerlifting', 76]].map(([name, routine, match], i) => (
-          <div key={i} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border shrink-0"
-              style={{ borderColor: color + '40', backgroundColor: color + '15', color }}>
-              {(name as string)[0]}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-[11px] font-semibold text-white">{name}</div>
-              <div className="text-[9px] text-white/30 truncate">{routine}</div>
-            </div>
-            <div className="text-right shrink-0">
-              <div className="text-xs font-bold" style={{ color }}>{match}%</div>
-              <div className="text-[9px] text-white/25">match</div>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="h-64 overflow-hidden relative">
+      <Image
+        src={src}
+        alt={alt}
+        width={900}
+        height={256}
+        className="w-full h-full object-cover object-top"
+        priority={false}
+      />
+      {/* subtle color tint overlay on hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+        style={{ backgroundColor: color }}
+      />
     </div>
   );
 }
 
 interface ProjectCardProps {
-  project: (typeof projects)[0];
+  project: (typeof projects)[0] & { highlight: { label: string; value: string } };
   index: number;
 }
 
 function ProjectCard({ project, index }: ProjectCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-100, 100], [8, -8]), { stiffness: 400, damping: 30 });
-  const rotateY = useSpring(useTransform(x, [-100, 100], [-8, 8]), { stiffness: 400, damping: 30 });
-
-  const handleMouse = (e: MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
-  };
-
-  const resetMouse = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative"
     >
-      <motion.div
-        ref={ref}
-        style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1200 }}
-        onMouseMove={handleMouse}
-        onMouseLeave={resetMouse}
-        className="group relative"
-      >
-        {/* Glow */}
         <div
           className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none blur-sm"
           style={{ background: `radial-gradient(ellipse at 50% 0%, ${project.color}25 0%, transparent 70%)` }}
         />
 
         <BrowserWindow url={project.url}>
-          {/* Preview */}
-          {project.preview === 'water' && <WaterPreview color={project.color} />}
-          {project.preview === 'management' && <ManagementPreview color={project.color} />}
-          {project.preview === 'spotter' && <SpotterPreview color={project.color} />}
+          <ImagePreview src={project.img} alt={project.title} color={project.color} />
 
           {/* Project info */}
           <div className="px-5 py-5 border-t border-white/[0.06]">
@@ -254,7 +159,6 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             </a>
           </div>
         </BrowserWindow>
-      </motion.div>
     </motion.div>
   );
 }
@@ -269,13 +173,13 @@ export default function ProjectsSection() {
     description: p.items[i].description,
     highlight: { ...proj.highlight, value: p.items[i].highlight },
   }));
+
   return (
     <section id="projects" className="relative py-32 md:py-40 bg-[var(--bg-alt)] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-40" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent to-white/10" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -295,7 +199,6 @@ export default function ProjectsSection() {
           </div>
         </motion.div>
 
-        {/* Project cards */}
         <div className="flex flex-col gap-8">
           {projectData.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useLang } from '@/components/providers/LanguageProvider';
 
 const workColors = ['#22C55E', '#10B981'];
@@ -17,17 +18,40 @@ export default function ExperienceSection() {
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full bg-green-500/5 blur-[160px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
+        {/* Header + profile card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-20 md:mb-28"
+          className="mb-20 md:mb-28 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8"
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">{e.tag}</p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold">
-            {e.title} <span className="gradient-text">{e.titleHighlight}</span>
-          </h2>
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">{e.tag}</p>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold">
+              {e.title} <span className="gradient-text">{e.titleHighlight}</span>
+            </h2>
+          </div>
+
+          {/* Profile card */}
+          <div className="flex items-center gap-4 p-4 rounded-2xl border border-white/[0.07] bg-white/[0.02] shrink-0">
+            <div className="relative w-[125px] h-[125px] rounded-xl overflow-hidden border-2 border-white/10 shrink-0">
+              <Image
+                src="/perfil.PNG"
+                alt="Jonathan Tubac"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">Jonathan Tubac</p>
+              <p className="text-xs text-white/40 mt-0.5">Software Engineer</p>
+              <div className="flex items-center gap-1.5 mt-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="text-[10px] text-white/30">Guatemala 🇬🇹</span>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">

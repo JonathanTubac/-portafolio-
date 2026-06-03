@@ -93,6 +93,13 @@ const en = {
           'Graph-powered app that recommends exercises and matches gym partners via Neo4j relationships. Designed and built the full REST API with Node.js + Express, co-led frontend architecture with React and Next.js.',
         highlight: 'Graph DB · Neo4j',
       },
+      {
+        title: 'Kontrol',
+        subtitle: 'Project Management Platform · Vue 3 + Node.js + AI',
+        description:
+          'Full-stack project management platform with team coordination, inventory tracking, and marketing tools. Features real-time communication via Socket.IO, an integrated AI agent, and Google OAuth authentication.',
+        highlight: 'AI + Socket.IO',
+      },
     ],
   },
   stack: {
@@ -271,6 +278,13 @@ const es: typeof en = {
         description:
           'App basada en grafos que recomienda ejercicios y conecta compañeros de gimnasio mediante relaciones Neo4j. Diseñé y construí la API REST completa con Node.js + Express, y co-lideré la arquitectura frontend.',
         highlight: 'Base de Grafos · Neo4j',
+      },
+      {
+        title: 'Kontrol',
+        subtitle: 'Plataforma de Gestión · Vue 3 + Node.js + IA',
+        description:
+          'Plataforma full-stack de gestión de proyectos con coordinación de equipos, control de inventario y herramientas de marketing. Comunicación en tiempo real con Socket.IO, agente de IA integrado y autenticación con Google OAuth.',
+        highlight: 'IA + Socket.IO',
       },
     ],
   },
