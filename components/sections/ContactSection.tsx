@@ -138,9 +138,9 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-32 md:py-40 bg-[#060610] overflow-hidden">
+    <section id="contact" className="relative py-32 md:py-40 bg-[#040c08] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-green-500/5 blur-[140px] pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-6">
         {/* Header */}

@@ -7,7 +7,7 @@ const workItems = [
     role: 'Software Engineer',
     company: 'SkIoT',
     period: 'Jan 2026 — Present',
-    color: '#3B82F6',
+    color: '#22C55E',
     bullets: [
       'Building and maintaining software solutions for IoT infrastructure.',
       'Developing full-stack features across web applications.',
@@ -31,7 +31,7 @@ const educationItems = [
     degree: 'CS & IT Engineering',
     institution: 'Universidad del Valle de Guatemala',
     period: '2024 — 2029',
-    color: '#8B5CF6',
+    color: '#14B8A6',
   },
   {
     degree: 'Industrial Bachillerato · Computer Science',
@@ -43,10 +43,10 @@ const educationItems = [
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative py-32 md:py-40 bg-[#060610] overflow-hidden">
+    <section id="experience" className="relative py-32 md:py-40 bg-[#040c08] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-40" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent to-white/10" />
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full bg-blue-500/5 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full bg-green-500/5 blur-[160px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -73,8 +73,8 @@ export default function ExperienceSection() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-center gap-3 mb-10"
             >
-              <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-8 h-8 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="7" width="20" height="14" rx="2" />
                   <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
                 </svg>
@@ -137,8 +137,8 @@ export default function ExperienceSection() {
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-center gap-3 mb-10"
             >
-              <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#14B8A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
                   <path d="M6 12v5c3 3 9 3 12 0v-5" />
                 </svg>

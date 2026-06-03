@@ -28,7 +28,7 @@ const projects = [
     tags: ['React', 'Node.js', 'REST API', 'PostgreSQL', 'MongoDB'],
     url: 'chemiq.app',
     status: 'Deployed',
-    color: '#8B5CF6',
+    color: '#14B8A6',
     preview: 'management',
     highlight: { label: 'Role', value: 'Architecture + Backend' },
     githubUrl: 'https://github.com/JonathanTubac',
@@ -54,7 +54,7 @@ const projects = [
 
 function WaterPreview({ color }: { color: string }) {
   return (
-    <div className="bg-[#0a0a0f] p-4 h-64">
+    <div className="bg-[#060e08] p-4 h-64">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: color }} />
@@ -92,7 +92,7 @@ function WaterPreview({ color }: { color: string }) {
 
 function ManagementPreview({ color }: { color: string }) {
   return (
-    <div className="bg-[#0a0a0f] p-4 h-64">
+    <div className="bg-[#060e08] p-4 h-64">
       <div className="flex gap-3 h-full">
         <div className="w-24 shrink-0 flex flex-col gap-1.5">
           {['Dashboard', 'Members', 'Inventory', 'Events', 'Reports'].map((item, i) => (
@@ -124,7 +124,7 @@ function ManagementPreview({ color }: { color: string }) {
 
 function SpotterPreview({ color }: { color: string }) {
   return (
-    <div className="bg-[#0a0a0f] p-4 h-64">
+    <div className="bg-[#060e08] p-4 h-64">
       <div className="flex items-center justify-between mb-4">
         <span className="text-[10px] font-mono text-white/40">Gym Partner Matches</span>
         <div className="flex items-center gap-1.5 text-[9px] px-2 py-0.5 rounded-full" style={{ backgroundColor: color + '20', color }}>
@@ -260,7 +260,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="relative py-32 md:py-40 bg-[#060610] overflow-hidden">
+    <section id="projects" className="relative py-32 md:py-40 bg-[#040c08] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-40" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent to-white/10" />
 

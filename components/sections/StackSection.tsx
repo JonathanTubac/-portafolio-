@@ -48,11 +48,11 @@ const stack: Record<string, Tech[]> = {
 };
 
 const categoryColors: Record<string, string> = {
-  Frontend:  '#3B82F6',
-  Backend:   '#10B981',
-  Database:  '#8B5CF6',
+  Frontend:  '#22C55E',
+  Backend:   '#14B8A6',
+  Database:  '#4ADE80',
   Languages: '#F59E0B',
-  Tools:     '#EC4899',
+  Tools:     '#a3e635',
 };
 
 const containerVariants = {
@@ -92,8 +92,8 @@ export default function StackSection() {
   return (
     <section id="stack" className="relative py-32 md:py-40 bg-bg overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-50" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[160px] pointer-events-none" />
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-purple-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-green-500/5 blur-[160px] pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-teal-500/5 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}

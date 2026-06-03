@@ -56,7 +56,7 @@ export default function MetricsSection() {
       <div className="absolute inset-0 bg-grid opacity-50" />
 
       {/* Center glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] rounded-full bg-blue-500/6 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] rounded-full bg-green-500/6 blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -103,7 +103,7 @@ export default function MetricsSection() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                  background: `linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent)`,
+                  background: `linear-gradient(90deg, transparent, rgba(34,197,94,0.5), transparent)`,
                   transformOrigin: 'center',
                 }}
               />

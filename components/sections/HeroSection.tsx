@@ -18,14 +18,14 @@ export default function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, #050509 70%)',
+            'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, #030806 70%)',
         }}
       />
 
       {/* Ambient glow blobs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-blue-500/8 blur-[100px]" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-purple-500/8 blur-[100px]" />
+        <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-green-500/8 blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-teal-500/8 blur-[100px]" />
       </div>
 
       {/* Content */}

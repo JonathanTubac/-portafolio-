@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #050509;
+  --background: #030806;
   --foreground: #fafafa;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
+  background: rgba(34, 197, 94, 0.25);
   color: #fff;
 }
 
@@ -44,14 +44,14 @@ body {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 50%, #14b8a6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-blue {
-  background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
+  background: linear-gradient(90deg, #22c55e 0%, #14b8a6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -59,11 +59,11 @@ body {
 
 /* Glow utilities */
 .glow-blue {
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.15), 0 0 80px rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 40px rgba(34, 197, 94, 0.15), 0 0 80px rgba(34, 197, 94, 0.05);
 }
 
 .glow-purple {
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.15), 0 0 80px rgba(139, 92, 246, 0.05);
+  box-shadow: 0 0 40px rgba(20, 184, 166, 0.15), 0 0 80px rgba(20, 184, 166, 0.05);
 }
 
 /* Grid background */

@@ -32,7 +32,7 @@ export default function Navbar() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           scrolled
-            ? 'py-3 bg-[#050509]/80 backdrop-blur-xl border-b border-white/[0.06]'
+            ? 'py-3 bg-[#030806]/80 backdrop-blur-xl border-b border-white/[0.06]'
             : 'py-5'
         )}
       >
@@ -127,7 +127,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-[#050509]/95 backdrop-blur-xl md:hidden flex flex-col justify-center px-8"
+            className="fixed inset-0 z-40 bg-[#030806]/95 backdrop-blur-xl md:hidden flex flex-col justify-center px-8"
           >
             <div className="flex flex-col gap-4">
               {links.map((link, i) => (

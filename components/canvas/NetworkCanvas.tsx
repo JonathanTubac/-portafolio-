@@ -33,9 +33,9 @@ interface Connection {
 }
 
 const NODE_DATA = [
-  { id: 'user',     label: 'Users',      fx: 0.06, fy: 0.45, color: '#3B82F6' },
-  { id: 'cdn',      label: 'CDN',        fx: 0.22, fy: 0.22, color: '#06B6D4' },
-  { id: 'frontend', label: 'Frontend',   fx: 0.32, fy: 0.42, color: '#8B5CF6' },
+  { id: 'user',     label: 'Users',      fx: 0.06, fy: 0.45, color: '#22C55E' },
+  { id: 'cdn',      label: 'CDN',        fx: 0.22, fy: 0.22, color: '#4ADE80' },
+  { id: 'frontend', label: 'Frontend',   fx: 0.32, fy: 0.42, color: '#14B8A6' },
   { id: 'gateway',  label: 'API',        fx: 0.50, fy: 0.32, color: '#EC4899' },
   { id: 'auth',     label: 'Auth',       fx: 0.52, fy: 0.58, color: '#F59E0B' },
   { id: 'backend',  label: 'Backend',    fx: 0.64, fy: 0.38, color: '#10B981' },

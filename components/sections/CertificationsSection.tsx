@@ -40,7 +40,7 @@ function CertModal({ cert, onClose }: { cert: (typeof certs)[0]; onClose: () => 
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.92, y: 16 }}
         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="relative max-w-3xl w-full rounded-2xl overflow-hidden border border-white/[0.10] bg-[#0a0a10] shadow-2xl"
+        className="relative max-w-3xl w-full rounded-2xl overflow-hidden border border-white/[0.10] bg-[#060e08] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -100,7 +100,7 @@ export default function CertificationsSection() {
     <>
       <section id="certifications" className="relative py-32 md:py-40 bg-bg overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-purple-500/5 blur-[160px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-teal-500/5 blur-[160px] pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6">
           {/* Header */}
