@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTheme } from 'next-themes';
 
 interface CanvasNode {
   id: string;
@@ -62,6 +63,15 @@ const CONNECTION_MAP = [
 
 export default function NetworkCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
+  const themeRef = useRef('dark');
+
+  useEffect(() => {
+    themeRef.current = resolvedTheme ?? 'dark';
+    if (canvasRef.current) {
+      canvasRef.current.style.opacity = resolvedTheme === 'light' ? '0.85' : '0.55';
+    }
+  }, [resolvedTheme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -153,7 +163,9 @@ export default function NetworkCanvas() {
         ctx.beginPath();
         ctx.moveTo(from.x, from.y);
         ctx.lineTo(to.x, to.y);
-        ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+        ctx.strokeStyle = themeRef.current === 'light'
+          ? 'rgba(13,31,18,0.12)'
+          : 'rgba(255,255,255,0.05)';
         ctx.lineWidth = 1;
         ctx.stroke();
 
@@ -219,7 +231,9 @@ export default function NetworkCanvas() {
         // Label
         ctx.font = '10px var(--font-geist-mono, monospace)';
         ctx.textAlign = 'center';
-        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.fillStyle = themeRef.current === 'light'
+          ? 'rgba(13,31,18,0.5)'
+          : 'rgba(255,255,255,0.45)';
         ctx.fillText(node.label, node.x, node.y - 13);
       });
 

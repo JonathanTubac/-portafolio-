@@ -12,7 +12,7 @@ const config: Config = {
         mono: ['var(--font-geist-mono)', 'Menlo', 'monospace'],
       },
       colors: {
-        bg: '#030806',
+        bg: 'var(--bg)',
         surface: 'rgba(255,255,255,0.04)',
         'surface-2': 'rgba(255,255,255,0.07)',
         border: 'rgba(255,255,255,0.08)',

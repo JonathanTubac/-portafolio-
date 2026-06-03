@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLang } from '@/components/providers/LanguageProvider';
 
 const certs = [
   {
@@ -25,7 +26,7 @@ const certs = [
   },
 ];
 
-function CertModal({ cert, onClose }: { cert: (typeof certs)[0]; onClose: () => void }) {
+function CertModal({ cert, onClose, openUrlLabel }: { cert: (typeof certs)[0]; onClose: () => void; openUrlLabel: string }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -40,7 +41,7 @@ function CertModal({ cert, onClose }: { cert: (typeof certs)[0]; onClose: () => 
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.92, y: 16 }}
         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="relative max-w-3xl w-full rounded-2xl overflow-hidden border border-white/[0.10] bg-[#060e08] shadow-2xl"
+        className="relative max-w-3xl w-full rounded-2xl overflow-hidden border border-white/[0.10] bg-[var(--bg-card)] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -62,7 +63,7 @@ function CertModal({ cert, onClose }: { cert: (typeof certs)[0]; onClose: () => 
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-white/[0.10] text-white/50 hover:text-white hover:border-white/25 hover:bg-white/[0.05] transition-all duration-200"
               >
-                Open URL ↗
+                {openUrlLabel}
               </a>
             )}
             <button
@@ -95,10 +96,12 @@ function CertModal({ cert, onClose }: { cert: (typeof certs)[0]; onClose: () => 
 
 export default function CertificationsSection() {
   const [activeCert, setActiveCert] = useState<(typeof certs)[0] | null>(null);
+  const { t } = useLang();
+  const c = t.certifications;
 
   return (
     <>
-      <section id="certifications" className="relative py-32 md:py-40 bg-bg overflow-hidden">
+      <section id="certifications" className="relative py-32 md:py-40 bg-[var(--bg)] overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-teal-500/5 blur-[160px] pointer-events-none" />
 
@@ -111,13 +114,11 @@ export default function CertificationsSection() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="mb-20 md:mb-28 text-center"
           >
-            <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">Credentials</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">{c.tag}</p>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5">
-              Certifi<span className="gradient-text">cations</span>
+              {c.titleStart}<span className="gradient-text">{c.titleHighlight}</span>
             </h2>
-            <p className="text-white/35 text-lg max-w-md mx-auto leading-relaxed">
-              Courses and credentials that back up the skills.
-            </p>
+            <p className="text-white/35 text-lg max-w-md mx-auto leading-relaxed">{c.subtitle}</p>
           </motion.div>
 
           {/* Cards grid */}
@@ -189,7 +190,7 @@ export default function CertificationsSection() {
                     <rect x="3" y="3" width="18" height="18" rx="2" />
                     <path d="M3 9h18M9 21V9" />
                   </svg>
-                  View credential
+                  {c.viewCredential}
                 </button>
 
                 {/* Bottom accent line */}
@@ -209,7 +210,7 @@ export default function CertificationsSection() {
             transition={{ delay: 0.4 }}
             className="text-center text-white/20 text-xs font-mono mt-12"
           >
-            Always learning — continuously expanding knowledge.
+            {c.bottomNote}
           </motion.p>
         </div>
       </section>
@@ -217,7 +218,7 @@ export default function CertificationsSection() {
       {/* Modal */}
       <AnimatePresence>
         {activeCert && (
-          <CertModal cert={activeCert} onClose={() => setActiveCert(null)} />
+          <CertModal cert={activeCert} onClose={() => setActiveCert(null)} openUrlLabel={c.openUrl} />
         )}
       </AnimatePresence>
     </>

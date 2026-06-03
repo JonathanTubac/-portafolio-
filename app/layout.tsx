@@ -3,6 +3,8 @@ import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
+import ThemeProvider from '@/components/providers/ThemeProvider';
+import { LanguageProvider } from '@/components/providers/LanguageProvider';
 
 export const metadata: Metadata = {
   title: 'Jonathan Tubac — Full Stack Developer',
@@ -26,9 +28,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <body className="bg-bg text-white font-sans antialiased">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

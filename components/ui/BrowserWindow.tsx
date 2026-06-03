@@ -11,13 +11,13 @@ export default function BrowserWindow({ children, url = 'app.example.com', class
   return (
     <div
       className={cn(
-        'rounded-2xl overflow-hidden border border-white/10 bg-[#0a0f0b]',
+        'rounded-2xl overflow-hidden border border-white/10 bg-[var(--bg-browser)]',
         'shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_32px_80px_rgba(0,0,0,0.6)]',
         className
       )}
     >
       {/* Browser chrome */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-[#0d1410] border-b border-white/[0.06]">
+      <div className="flex items-center gap-3 px-4 py-3 bg-[var(--bg-chrome)] border-b border-white/[0.06]">
         <div className="flex gap-1.5 shrink-0">
           <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
           <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />

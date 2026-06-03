@@ -3,37 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import MagneticButton from '@/components/ui/MagneticButton';
-
-const COMMANDS: { input: string; output: string[] }[] = [
-  {
-    input: 'whoami',
-    output: [
-      'Jonathan Tubac — Full Stack Developer',
-      'Location: Guatemala City, Guatemala 🇬🇹',
-      'Focus: React SPAs · REST APIs · Docker',
-      'Status: Open to local & remote opportunities',
-    ],
-  },
-  {
-    input: 'cat stack.txt',
-    output: [
-      'Frontend  → React, Next.js, TypeScript, Tailwind CSS',
-      'Backend   → Node.js, NestJS, Express · REST APIs',
-      'Database  → PostgreSQL, MongoDB, Redis',
-      'DevOps    → Docker, GitHub Actions, Vercel, AWS',
-      'Testing   → Vitest, Jest, Supertest',
-    ],
-  },
-  {
-    input: 'open github',
-    output: [
-      '→ github.com/JonathanTubac',
-      '  ↳ Public repos with READMEs and live demos',
-      '  ↳ React SPAs · REST APIs · Dockerized projects',
-      '  ↳ Commit history shows consistent activity',
-    ],
-  },
-];
+import { useLang } from '@/components/providers/LanguageProvider';
 
 interface Line {
   type: 'input' | 'output' | 'blank';
@@ -41,7 +11,7 @@ interface Line {
   done?: boolean;
 }
 
-function useTerminal() {
+function useTerminal(commands: { input: string; output: string[] }[]) {
   const [lines, setLines] = useState<Line[]>([
     { type: 'output', text: '  ╔══════════════════════════════════╗', done: true },
     { type: 'output', text: '  ║     Jonathan Tubac — Portfolio   ║', done: true },
@@ -53,57 +23,54 @@ function useTerminal() {
   const [typing, setTyping] = useState(false);
 
   useEffect(() => {
-    if (phase >= COMMANDS.length) return;
-
-    const cmd = COMMANDS[phase];
+    if (phase >= commands.length) return;
+    const cmd = commands[phase];
 
     if (!typing) {
-      // Start typing the input
       const delay = setTimeout(() => {
         setLines((prev) => [...prev, { type: 'input', text: '', done: false }]);
         setTyping(true);
         setCharIdx(0);
-      }, 600);
+      }, 800);
       return () => clearTimeout(delay);
     }
 
-    if (charIdx <= cmd.input.length) {
+    if (charIdx < cmd.input.length) {
       const t = setTimeout(() => {
         setLines((prev) => {
-          const updated = [...prev];
-          updated[updated.length - 1] = {
-            ...updated[updated.length - 1],
-            text: cmd.input.slice(0, charIdx),
-          };
-          return updated;
+          const next = [...prev];
+          const last = next[next.length - 1];
+          if (last.type === 'input') {
+            next[next.length - 1] = { ...last, text: cmd.input.slice(0, charIdx + 1) };
+          }
+          return next;
         });
         setCharIdx((c) => c + 1);
       }, 55 + Math.random() * 40);
       return () => clearTimeout(t);
     }
 
-    // Done typing input — show output
-    const t = setTimeout(() => {
+    const outputDelay = setTimeout(() => {
       setLines((prev) => {
-        const updated = [...prev];
-        updated[updated.length - 1].done = true;
-        return [
-          ...updated,
-          ...cmd.output.map((text) => ({ type: 'output' as const, text, done: true })),
-          { type: 'blank', text: '', done: true },
-        ];
+        const next = [...prev];
+        next[next.length - 1] = { ...next[next.length - 1], done: true };
+        const outputLines: Line[] = cmd.output.map((text) => ({ type: 'output', text, done: true }));
+        return [...next, ...outputLines, { type: 'blank', text: '', done: true }];
       });
-      setTyping(false);
       setPhase((p) => p + 1);
-    }, 350);
-    return () => clearTimeout(t);
-  }, [phase, typing, charIdx]);
+      setTyping(false);
+    }, 400);
+    return () => clearTimeout(outputDelay);
+  }, [phase, typing, charIdx, commands]);
 
   return lines;
 }
 
 export default function ContactSection() {
-  const lines = useTerminal();
+  const { t } = useLang();
+  const c = t.contact;
+
+  const lines = useTerminal(c.autoCommands);
   const terminalRef = useRef<HTMLDivElement>(null);
   const [userInput, setUserInput] = useState('');
   const [userLines, setUserLines] = useState<{ input: string; output: string }[]>([]);
@@ -118,17 +85,19 @@ export default function ContactSection() {
     e.preventDefault();
     const cmd = userInput.trim().toLowerCase();
     const responses: Record<string, string> = {
-      help: 'Commands: whoami | stack | github | contact | resume | location | clear',
-      whoami: 'Jonathan Tubac — Full Stack Developer, Guatemala City 🇬🇹',
-      stack: 'React · Next.js · Node.js · TypeScript · PostgreSQL · Docker · REST APIs',
-      skills: 'React · Next.js · Node.js · TypeScript · PostgreSQL · Docker · REST APIs',
-      github: '→ github.com/JonathanTubac  (public repos + live demos)',
-      contact: 'Email: javiertubac1290.e@gmail.com',
-      location: 'Guatemala City, Guatemala 🇬🇹 — Open to local & remote',
-      resume: 'Opening CV... → /jonathan-tubac-cv.pdf',
+      help: c.commands.help,
+      whoami: c.commands.whoami,
+      stack: c.commands.stack,
+      skills: c.commands.stack,
+      github: c.commands.github,
+      contact: c.commands.contact,
+      contacto: c.commands.contact,
+      location: c.commands.location,
+      ubicacion: c.commands.location,
       clear: '__clear__',
+      limpiar: '__clear__',
     };
-    const output = responses[cmd] ?? `Command not found: "${cmd}" — type "help" for available commands`;
+    const output = responses[cmd] ?? c.commands.unknown(userInput.trim());
     if (output === '__clear__') {
       setUserLines([]);
     } else {
@@ -138,7 +107,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-32 md:py-40 bg-[#040c08] overflow-hidden">
+    <section id="contact" className="relative py-32 md:py-40 bg-[var(--bg-alt)] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-40" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-green-500/5 blur-[140px] pointer-events-none" />
 
@@ -151,14 +120,11 @@ export default function ContactSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">Contact</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">{c.tag}</p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5">
-            Let&apos;s build{' '}
-            <span className="gradient-text">something</span>
+            {c.title}<span className="gradient-text">{c.titleHighlight}</span>
           </h2>
-          <p className="text-white/35 text-lg max-w-lg mx-auto leading-relaxed">
-            Have a project in mind? Let&apos;s talk. I&apos;m available for freelance, contract, and full-time opportunities.
-          </p>
+          <p className="text-white/35 text-lg max-w-lg mx-auto leading-relaxed">{c.subtitle}</p>
         </motion.div>
 
         {/* Terminal */}
@@ -170,21 +136,21 @@ export default function ContactSection() {
           className="rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_40px_100px_rgba(0,0,0,0.6)]"
         >
           {/* Terminal header */}
-          <div className="flex items-center gap-3 px-5 py-3.5 bg-[#111118] border-b border-white/[0.06]">
+          <div className="flex items-center gap-3 px-5 py-3.5 bg-[var(--bg-chrome)] border-b border-white/[0.06]">
             <div className="flex gap-1.5">
               <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
               <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
               <div className="w-3 h-3 rounded-full bg-[#28C840]" />
             </div>
             <span className="flex-1 text-center text-xs text-white/20 font-mono">
-              jonathan@portfolio — bash
+              {c.terminalTitle}
             </span>
           </div>
 
           {/* Terminal body */}
           <div
             ref={terminalRef}
-            className="bg-[#0b0b10] p-6 font-mono text-sm overflow-y-auto"
+            className="bg-[var(--bg-card)] p-6 font-mono text-sm overflow-y-auto"
             style={{ minHeight: 340, maxHeight: 400 }}
           >
             {lines.map((line, i) => (
@@ -205,7 +171,6 @@ export default function ContactSection() {
               </div>
             ))}
 
-            {/* User interaction lines */}
             {userLines.map((ul, i) => (
               <div key={`u-${i}`}>
                 <div className="flex items-center gap-2">
@@ -216,14 +181,13 @@ export default function ContactSection() {
               </div>
             ))}
 
-            {/* Interactive input */}
             <form onSubmit={handleSubmit} className="flex items-center gap-2 mt-1">
               <span className="text-emerald-400 shrink-0">❯</span>
               <input
                 type="text"
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                placeholder="type a command..."
+                placeholder={c.placeholder}
                 className="flex-1 bg-transparent text-white/70 outline-none placeholder:text-white/15 caret-emerald-400"
                 spellCheck={false}
                 autoComplete="off"
@@ -232,7 +196,6 @@ export default function ContactSection() {
           </div>
         </motion.div>
 
-        {/* Help text */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -240,10 +203,9 @@ export default function ContactSection() {
           transition={{ delay: 0.3 }}
           className="text-center text-white/20 text-xs font-mono mt-4"
         >
-          try: help · contact · resume · skills · clear
+          {c.hint}
         </motion.p>
 
-        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -255,7 +217,7 @@ export default function ContactSection() {
             href="mailto:javiertubac1290.e@gmail.com"
             className="px-8 py-3.5 bg-white text-black text-sm font-semibold rounded-xl hover:bg-white/90 transition-colors"
           >
-            javiertubac1290.e@gmail.com →
+            {c.emailLabel}
           </MagneticButton>
           <MagneticButton
             href="https://github.com/JonathanTubac"

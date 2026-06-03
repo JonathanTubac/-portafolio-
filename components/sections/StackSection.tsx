@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useLang } from '@/components/providers/LanguageProvider';
 
 type Tech = {
   name: string;
@@ -89,8 +90,10 @@ function TechIcon({ tech }: { tech: Tech }) {
 }
 
 export default function StackSection() {
+  const { t } = useLang();
+  const s = t.stack;
   return (
-    <section id="stack" className="relative py-32 md:py-40 bg-bg overflow-hidden">
+    <section id="stack" className="relative py-32 md:py-40 bg-[var(--bg)] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-green-500/5 blur-[160px] pointer-events-none" />
       <div className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-teal-500/5 blur-[120px] pointer-events-none" />
@@ -104,13 +107,11 @@ export default function StackSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-20 md:mb-28 text-center"
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">Technology</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">{s.tag}</p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5">
-            My <span className="gradient-text">stack</span>
+            {s.title} <span className="gradient-text">{s.titleHighlight}</span>
           </h2>
-          <p className="text-white/35 text-lg max-w-md mx-auto leading-relaxed">
-            The tools I use to build full-stack products — chosen for reliability, performance, and developer experience.
-          </p>
+          <p className="text-white/35 text-lg max-w-md mx-auto leading-relaxed">{s.subtitle}</p>
         </motion.div>
 
         {/* Stack grid */}
@@ -172,9 +173,9 @@ export default function StackSection() {
           className="mt-16 p-6 rounded-2xl border border-white/[0.07] bg-white/[0.02] flex flex-col sm:flex-row items-center justify-between gap-4"
         >
           <div>
-            <p className="text-white font-semibold mb-1">Currently exploring</p>
+            <p className="text-white font-semibold mb-1">{s.exploringTitle}</p>
             <p className="text-white/35 text-sm">
-              Diving deeper into cloud infrastructure and backend architecture at UVG.
+              {s.exploringDesc}
             </p>
           </div>
           <div className="flex gap-2 shrink-0">

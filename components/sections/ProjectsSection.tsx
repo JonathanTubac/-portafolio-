@@ -3,6 +3,7 @@
 import { useRef, type MouseEvent } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import BrowserWindow from '@/components/ui/BrowserWindow';
+import { useLang } from '@/components/providers/LanguageProvider';
 
 const projects = [
   {
@@ -54,7 +55,7 @@ const projects = [
 
 function WaterPreview({ color }: { color: string }) {
   return (
-    <div className="bg-[#060e08] p-4 h-64">
+    <div className="bg-[var(--bg-card)] p-4 h-64">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: color }} />
@@ -92,7 +93,7 @@ function WaterPreview({ color }: { color: string }) {
 
 function ManagementPreview({ color }: { color: string }) {
   return (
-    <div className="bg-[#060e08] p-4 h-64">
+    <div className="bg-[var(--bg-card)] p-4 h-64">
       <div className="flex gap-3 h-full">
         <div className="w-24 shrink-0 flex flex-col gap-1.5">
           {['Dashboard', 'Members', 'Inventory', 'Events', 'Reports'].map((item, i) => (
@@ -124,7 +125,7 @@ function ManagementPreview({ color }: { color: string }) {
 
 function SpotterPreview({ color }: { color: string }) {
   return (
-    <div className="bg-[#060e08] p-4 h-64">
+    <div className="bg-[var(--bg-card)] p-4 h-64">
       <div className="flex items-center justify-between mb-4">
         <span className="text-[10px] font-mono text-white/40">Gym Partner Matches</span>
         <div className="flex items-center gap-1.5 text-[9px] px-2 py-0.5 rounded-full" style={{ backgroundColor: color + '20', color }}>
@@ -259,8 +260,17 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 }
 
 export default function ProjectsSection() {
+  const { t } = useLang();
+  const p = t.projects;
+  const projectData = projects.map((proj, i) => ({
+    ...proj,
+    title: p.items[i].title,
+    subtitle: p.items[i].subtitle,
+    description: p.items[i].description,
+    highlight: { ...proj.highlight, value: p.items[i].highlight },
+  }));
   return (
-    <section id="projects" className="relative py-32 md:py-40 bg-[#040c08] overflow-hidden">
+    <section id="projects" className="relative py-32 md:py-40 bg-[var(--bg-alt)] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-40" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent to-white/10" />
 
@@ -273,21 +283,21 @@ export default function ProjectsSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-16 md:mb-20"
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">Featured Work</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">{p.tag}</p>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-              Projects I&apos;ve{' '}
-              <span className="gradient-text">built</span>
+              {p.title}{' '}
+              <span className="gradient-text">{p.titleHighlight}</span>
             </h2>
             <p className="text-white/35 max-w-sm text-sm leading-relaxed md:text-right">
-              Real applications built in teams and solo — from hackathons to production systems.
+              {p.subtitle}
             </p>
           </div>
         </motion.div>
 
         {/* Project cards */}
         <div className="flex flex-col gap-8">
-          {projects.map((project, i) => (
+          {projectData.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>

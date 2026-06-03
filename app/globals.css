@@ -5,6 +5,26 @@
 :root {
   --background: #030806;
   --foreground: #fafafa;
+
+  /* Background tokens */
+  --bg:         #030806;
+  --bg-alt:     #040c08;
+  --bg-card:    #060e08;
+  --bg-browser: #0a0f0b;
+  --bg-chrome:  #0d1410;
+  --bg-nav:     #071a0b;
+}
+
+html.light {
+  --background: #f2faf5;
+  --foreground: #0d1f12;
+
+  --bg:         #f2faf5;
+  --bg-alt:     #ffffff;
+  --bg-card:    #f7fbf8;
+  --bg-browser: #eef7f1;
+  --bg-chrome:  #e5f2e9;
+  --bg-nav:     #0d3318;
 }
 
 * {
@@ -18,12 +38,101 @@ html {
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--bg);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Light mode overrides ── */
+
+/* Text */
+html.light .text-white         { color: rgb(13 31 18 / 0.95) !important; }
+html.light .text-white\/70     { color: rgb(13 31 18 / 0.75) !important; }
+html.light .text-white\/50     { color: rgb(13 31 18 / 0.60) !important; }
+html.light .text-white\/40     { color: rgb(13 31 18 / 0.50) !important; }
+html.light .text-white\/35     { color: rgb(13 31 18 / 0.45) !important; }
+html.light .text-white\/30     { color: rgb(13 31 18 / 0.40) !important; }
+html.light .text-white\/25     { color: rgb(13 31 18 / 0.35) !important; }
+html.light .text-white\/20     { color: rgb(13 31 18 / 0.28) !important; }
+
+/* Borders */
+html.light [class*="border-white"] { border-color: rgb(13 31 18 / 0.12) !important; }
+
+/* Subtle bg fills (cards, rows) */
+html.light .bg-white\/\[0\.02\] { background-color: rgb(13 31 18 / 0.03) !important; }
+html.light .bg-white\/\[0\.03\] { background-color: rgb(13 31 18 / 0.04) !important; }
+html.light .bg-white\/\[0\.04\] { background-color: rgb(13 31 18 / 0.04) !important; }
+html.light .bg-white\/\[0\.05\] { background-color: rgb(13 31 18 / 0.05) !important; }
+html.light .bg-white\/\[0\.06\] { background-color: rgb(13 31 18 / 0.06) !important; }
+html.light .bg-white\/5         { background-color: rgb(13 31 18 / 0.05) !important; }
+html.light .bg-white\/10        { background-color: rgb(13 31 18 / 0.08) !important; }
+html.light .bg-white\/15        { background-color: rgb(13 31 18 / 0.10) !important; }
+
+/* Navbar backdrop */
+html.light .bg-white\/\[0\.06\] { background-color: rgb(13 31 18 / 0.06) !important; }
+
+/* Hover states */
+html.light .hover\:bg-white\/\[0\.06\]:hover  { background-color: rgb(13 31 18 / 0.07) !important; }
+html.light .hover\:bg-white\/\[0\.1\]:hover   { background-color: rgb(13 31 18 / 0.09) !important; }
+html.light .hover\:text-white:hover            { color: rgb(13 31 18) !important; }
+html.light .hover\:border-white\/25:hover      { border-color: rgb(13 31 18 / 0.25) !important; }
+
+/* Scrollbar */
+html.light::-webkit-scrollbar-thumb { background: rgba(13,31,18,0.15); }
+
+/* Nav & footer always have dark bg — keep white text/borders regardless of theme */
+html.light header [class*="text-white"]  { color: inherit !important; }
+html.light footer [class*="text-white"]  { color: inherit !important; }
+html.light header .text-white\/50        { color: rgba(255,255,255,0.50) !important; }
+html.light header .text-white\/40        { color: rgba(255,255,255,0.40) !important; }
+html.light header .text-white\/30        { color: rgba(255,255,255,0.30) !important; }
+html.light header .text-white\/70        { color: rgba(255,255,255,0.70) !important; }
+html.light footer .text-white\/30        { color: rgba(255,255,255,0.30) !important; }
+html.light footer .text-white\/20        { color: rgba(255,255,255,0.20) !important; }
+html.light header [class*="border-white"] { border-color: rgba(255,255,255,0.10) !important; }
+html.light footer [class*="border-white"] { border-color: rgba(255,255,255,0.08) !important; }
+html.light header [class*="bg-white"]    { background-color: rgba(255,255,255,0.08) !important; }
+html.light header .hover\:text-white:hover { color: #ffffff !important; }
+
+/* Hero vignette — less aggressive in light mode */
+html.light .hero-vignette { opacity: 0.6; }
+
+/* Grid background — dark stroke in light mode */
+html.light .bg-grid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(13 31 18 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+/* Hero — tone down glow blobs in light mode */
+html.light .bg-green-500\/8 { background-color: rgb(34 197 94 / 0.12) !important; }
+html.light .bg-teal-500\/8  { background-color: rgb(20 184 166 / 0.12) !important; }
+
+/* Hero primary CTA — dark bg in light mode */
+html.light .hero-cta-primary {
+  background-color: #0d1f12 !important;
+  color: #f2faf5 !important;
+}
+
+/* Hero secondary CTA */
+html.light .hero-cta-secondary {
+  background-color: rgb(13 31 18 / 0.08) !important;
+  border-color: rgb(13 31 18 / 0.2) !important;
+  color: rgb(13 31 18 / 0.85) !important;
+}
+
+/* Terminal text in light mode */
+html.light .text-emerald-400 { color: #15803d !important; }
+html.light .text-white\/80   { color: rgb(13 31 18 / 0.85) !important; }
+html.light .text-white\/50   { color: rgb(13 31 18 / 0.55) !important; }
+
+/* Gradient text stays vibrant in light mode — keep it */
+
+/* Section shadows for light */
+html.light .shadow-\[0_0_0_1px_rgba\(255\,255\,255\,0\.04\)\,0_40px_100px_rgba\(0\,0\,0\,0\.6\)\] {
+  box-shadow: 0 0 0 1px rgba(13,31,18,0.08), 0 20px 60px rgba(13,31,18,0.12) !important;
 }
 
 ::selection {

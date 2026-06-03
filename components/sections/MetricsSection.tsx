@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useLang } from '@/components/providers/LanguageProvider';
 
-const metrics = [
-  { value: 3, suffix: '+', label: 'Projects Built', description: 'Real applications shipped' },
-  { value: 2, suffix: '+', label: 'Years in Dev', description: 'Full-stack development' },
-  { value: 13, suffix: '+', label: 'Technologies', description: 'Languages, frameworks & DBs' },
-  { value: 1, suffix: 'st', label: 'Hackathon Win', description: 'Copernicus x SENACYT' },
+const metricValues = [
+  { value: 3, suffix: '+' },
+  { value: 2, suffix: '+' },
+  { value: 13, suffix: '+' },
+  { value: 1, suffix: 'st' },
 ];
 
 function AnimatedCounter({
@@ -50,9 +51,12 @@ function AnimatedCounter({
 export default function MetricsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLang();
+  const m = t.metrics;
+  const metrics = metricValues.map((v, i) => ({ ...v, ...m.items[i] }));
 
   return (
-    <section className="relative py-28 md:py-36 bg-bg overflow-hidden">
+    <section className="relative py-28 md:py-36 bg-[var(--bg)] overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-50" />
 
       {/* Center glow */}
@@ -67,9 +71,9 @@ export default function MetricsSection() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-20"
         >
-          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">By the numbers</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-white/25 mb-4">{m.tag}</p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold">
-            The <span className="gradient-text">impact</span>
+            {m.title} <span className="gradient-text">{m.titleHighlight}</span>
           </h2>
         </motion.div>
 
@@ -82,7 +86,7 @@ export default function MetricsSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative bg-bg px-8 py-10 flex flex-col items-center text-center group hover:bg-white/[0.025] transition-colors duration-300"
+              className="relative bg-[var(--bg)] px-8 py-10 flex flex-col items-center text-center group hover:bg-white/[0.025] transition-colors duration-300"
             >
               {/* Number */}
               <div className="text-5xl md:text-6xl font-bold gradient-text mb-3 tabular-nums">
@@ -119,7 +123,7 @@ export default function MetricsSection() {
           transition={{ delay: 0.4 }}
           className="text-center text-white/25 text-sm mt-10"
         >
-          Currently available for freelance, contract, and full-time opportunities.
+          {m.bottomNote}
         </motion.p>
       </div>
     </section>
