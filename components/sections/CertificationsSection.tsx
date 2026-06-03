@@ -10,7 +10,7 @@ const certs = [
     name: 'JavaScript: From First Steps to Professional',
     issuer: 'Frontend Masters',
     year: 'Apr 2026',
-    color: '#F7DF1E',
+    color: '#E8292C',
     issuerLogo: '/frontendmasters-logo.webp',
     certImg: '/frontedmasters-js.PNG',
     credentialUrl: 'https://www.credential.net/39a02473f7-FFUQWovrnh',
