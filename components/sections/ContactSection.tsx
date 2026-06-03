@@ -123,7 +123,7 @@ export default function ContactSection() {
       stack: 'React · Next.js · Node.js · TypeScript · PostgreSQL · Docker · REST APIs',
       skills: 'React · Next.js · Node.js · TypeScript · PostgreSQL · Docker · REST APIs',
       github: '→ github.com/JonathanTubac  (public repos + live demos)',
-      contact: 'Email: jonathan.tubac@skiot.net',
+      contact: 'Email: javiertubac1290.e@gmail.com',
       location: 'Guatemala City, Guatemala 🇬🇹 — Open to local & remote',
       resume: 'Opening CV... → /jonathan-tubac-cv.pdf',
       clear: '__clear__',
@@ -252,10 +252,10 @@ export default function ContactSection() {
           className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <MagneticButton
-            href="mailto:jonathan.tubac@skiot.net"
+            href="mailto:javiertubac1290.e@gmail.com"
             className="px-8 py-3.5 bg-white text-black text-sm font-semibold rounded-xl hover:bg-white/90 transition-colors"
           >
-            jonathan.tubac@skiot.net →
+            javiertubac1290.e@gmail.com →
           </MagneticButton>
           <MagneticButton
             href="https://github.com/JonathanTubac"
