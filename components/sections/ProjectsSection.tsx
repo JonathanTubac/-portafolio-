@@ -12,14 +12,17 @@ const projects = [
     description:
       'Real-time web monitoring system for the Motagua River basin. Built the admin interface in React with live sensor data from a REST API, enabling visualisation of environmental metrics at scale.',
     tags: ['React', 'REST API', 'MongoDB', 'Node.js'],
-    url: 'waterway.app',
+    url: 'water-way.netlify.app',
     status: '1st Place',
     color: '#06B6D4',
     img: '/waterway.PNG',
     highlight: { label: 'Award', value: 'Copernicus x SENACYT' },
-    githubUrl: 'https://github.com/JonathanTubac',
-    liveUrl: null,
     backend: 'React · REST API · MongoDB',
+    links: [
+      { label: 'Frontend', url: 'https://github.com/kinalitos/waterway-frontend', isLive: false },
+      { label: 'Backend',  url: 'https://github.com/kinalitos/waterway-backend',  isLive: false },
+      { label: 'Live ↗',   url: 'https://water-way.netlify.app/',                 isLive: true  },
+    ],
   },
   {
     title: 'CHEMIQ',
@@ -27,14 +30,16 @@ const projects = [
     description:
       'Full-stack management platform for the UVG chemistry association. Co-designed the architecture, built REST API endpoints with Node.js + PostgreSQL, and led the database migration to MongoDB for better scalability.',
     tags: ['React', 'Node.js', 'REST API', 'PostgreSQL', 'MongoDB'],
-    url: 'chemiq.app',
-    status: 'Deployed',
+    url: 'chemiq · academic project',
+    status: 'Academic',
     color: '#14B8A6',
     img: '/Chemiq.PNG',
     highlight: { label: 'Role', value: 'Architecture + Backend' },
-    githubUrl: 'https://github.com/JonathanTubac',
-    liveUrl: null,
     backend: 'Node.js · REST API · PostgreSQL → MongoDB',
+    links: [
+      { label: 'Frontend', url: 'https://github.com/asanabria-2021067/frontend-quimica',  isLive: false },
+      { label: 'Backend',  url: 'https://github.com/asanabria-2021067/chemiq-backend',    isLive: false },
+    ],
   },
   {
     title: 'Spotter',
@@ -42,14 +47,16 @@ const projects = [
     description:
       'Graph-powered app that recommends exercises and matches gym partners via Neo4j relationships. Designed and built the full REST API with Node.js + Express, co-led frontend architecture with React and Next.js.',
     tags: ['React', 'Next.js', 'Node.js', 'Express', 'Neo4j', 'REST API'],
-    url: 'spotter.app',
-    status: 'Deployed',
+    url: 'spotter · academic project',
+    status: 'Academic',
     color: '#F59E0B',
     img: '/spotter.PNG',
     highlight: { label: 'Tech', value: 'Graph DB · Neo4j' },
-    githubUrl: 'https://github.com/JonathanTubac',
-    liveUrl: null,
     backend: 'Node.js · Express · REST API · Neo4j',
+    links: [
+      { label: 'Frontend', url: 'https://github.com/jsam1904/Spotter',                    isLive: false },
+      { label: 'Backend',  url: 'https://github.com/JonathanTubac/Spotter-neo4j-backend', isLive: false },
+    ],
   },
   {
     title: 'Kontrol',
@@ -57,14 +64,16 @@ const projects = [
     description:
       'Full-stack project management platform with team coordination, inventory tracking, and marketing tools. Features real-time communication via Socket.IO, AI agent integration, and Google OAuth authentication.',
     tags: ['Vue 3', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'Docker', 'Socket.IO'],
-    url: 'github.com/PabloVS044/Kontrol',
+    url: '34.121.51.151.nip.io',
     status: 'Open Source',
     color: '#6366F1',
     img: '/kontrol.PNG',
     highlight: { label: 'Tech', value: 'AI + Socket.IO' },
-    githubUrl: 'https://github.com/PabloVS044/Kontrol',
-    liveUrl: null,
     backend: 'Vue 3 · Node.js · PostgreSQL · MongoDB · Docker',
+    links: [
+      { label: 'Repo',   url: 'https://github.com/PabloVS044/Kontrol',  isLive: false },
+      { label: 'Live ↗', url: 'https://34.121.51.151.nip.io/',          isLive: true  },
+    ],
   },
 ];
 
@@ -89,7 +98,7 @@ function ImagePreview({ src, alt, color }: { src: string; alt: string; color: st
 }
 
 interface ProjectCardProps {
-  project: (typeof projects)[0] & { highlight: { label: string; value: string } };
+  project: Omit<(typeof projects)[0], 'highlight'> & { highlight: { label: string; value: string } };
   index: number;
 }
 
@@ -142,21 +151,38 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
           </div>
 
-          {/* GitHub CTA */}
-          <div className="flex items-center justify-between px-5 py-3.5 border-t border-white/[0.05] bg-white/[0.01]">
-            <span className="text-[10px] text-white/20 font-mono truncate mr-4">{project.backend}</span>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-white/[0.10] text-white/50 hover:text-white hover:border-white/25 hover:bg-white/[0.05] transition-all duration-200 shrink-0"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              GitHub
-            </a>
+          {/* Links footer */}
+          <div className="flex items-center justify-between px-5 py-3.5 border-t border-white/[0.05] bg-white/[0.01] gap-3">
+            <span className="text-[10px] text-white/20 font-mono truncate">{project.backend}</span>
+            <div className="flex gap-2 shrink-0">
+              {project.links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border transition-all duration-200"
+                  style={link.isLive ? {
+                    backgroundColor: project.color + '15',
+                    borderColor: project.color + '40',
+                    color: project.color,
+                  } : {
+                    borderColor: 'rgba(255,255,255,0.10)',
+                    color: 'rgba(255,255,255,0.50)',
+                  }}
+                  onMouseEnter={e => { if (!link.isLive) { (e.currentTarget as HTMLAnchorElement).style.color = '#fff'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(255,255,255,0.25)'; } }}
+                  onMouseLeave={e => { if (!link.isLive) { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.50)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(255,255,255,0.10)'; } }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {!link.isLive && (
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                  )}
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </BrowserWindow>
     </motion.div>
